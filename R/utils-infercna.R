@@ -1,26 +1,38 @@
+rowcenter = function(m, by = 'mean') {
+    m = as.matrix(m)
+    if (by == 'mean')  by = rowMeans(m, na.rm = T)
+    else if (by == 'median') by = matrixStats::rowMedians(m, na.rm = T)
+    else stopifnot(is.numeric(by) & length(by) == nrow(m))
+    t(scale(t(m), center = by, scale = F))
+}
 
-#' @importFrom scalop colcenter
-#' @export
-scalop::colcenter
+colcenter = function(m, by = 'mean') {
+    m = as.matrix(m)
+    if (by == 'mean')  by = colMeans(m, na.rm = T)
+    else if (by == 'median') by = matrixStats::colMedians(m, na.rm = T)
+    else stopifnot(is.numeric(by) & length(by) == ncol(m))
+    scale(m, center = by, scale = F)
+}
 
-#' @importFrom scalop rowcenter
-#' @export
-scalop::rowcenter
+unlogtpm = function(m, bulk = F) {
+    # wrapper around scalop::tpm since scalop::tpm is confusing..
+    # in that it does not generate tpm from counts, but rather removes log, scaling and pseudocount
+    # if (has_dim(m)) 
+    m = as.matrix(m)
+    if (bulk) x = 1
+    else x = 10
+    #(2^m) * x - 1 
+    (2^(m) - 1) * x
+}
 
-#' @importFrom scalop logtpm
-#' @export
-scalop::logtpm
+logtpm = function(m, bulk = F) {
+    #if (has_dim(m))
+    m = as.matrix(m)
+    if (bulk) x = 1
+    else x = 10
+    log2((m/x) + 1)
+}
 
-#' @importFrom scalop unlogtpm
-#' @export
-scalop::unlogtpm
-
-#' @title Squish matrix values into range
-#' @description Squish matrix values into range
-#' @param m matrix to manipulate
-#' @param range numeric vector of length two giving desired output range. Default: c(-3, 3)
-#' @rdname clip
-#' @export 
 clip <- function(m, range = c(-3, 3)) {
     m = as.matrix(m)
     m[m < range[[1]]] <- range[[1]]

@@ -1,17 +1,11 @@
-Package: infercna
+Package: infercnaLight
 Title: Infer Copy Number Alterations And Clonality In (Single-Cell) RNA-seq Data 
 Version: 1.0.0
-Authors@R: 
-    person(given = "Julie",
-           family = "Laffy",
-           role = c("aut", "cre"),
-           email = "julie.laffy@weizmann.ac.il",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors: Ko Abe
 Description: When gene expression levels are averaged over large enough chromosomal regions they no longer reflect individual genes' activities. Instead, they reflect amplifications or deletions of parts of the genome, i.e. alterations in the chromosomal copy numbers (CNAs). <infercna> infers these alterations from RNA-sequencing expression data. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-biocViews:
 Imports: 
     stats,
     dplyr,
@@ -26,14 +20,10 @@ Imports:
     ggpubr,
     reshape2,
     mixtools,
-    ggplot2,
     hrbrthemes,
     scales
-Remotes: jlaffy/scalop
-RoxygenNote: 7.1.1
 Suggests: 
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/jlaffy/infercna
-BugReports: https://github.com/jlaffy/infercna/issues
+
