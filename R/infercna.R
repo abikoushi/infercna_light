@@ -65,6 +65,7 @@ infercna = function(m,
     if (verbose) message('Preparing to calculate CNA values on each chromosome in turn...')
     ms = splitGenes(m, by = 'chr')
     if (verbose) message('Calculating rolling means with a window size of ', window, ' genes...')
+    #cna
     cna = sapply(ms, function(m) try(runMean(m, k = window, verbose = verbose)), simplify = F)
     cna = cna[sapply(cna, class) != 'try-error' | !sapply(class, isFALSE)]
     cna = Reduce(rbind, cna)
